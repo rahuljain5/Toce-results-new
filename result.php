@@ -1,35 +1,33 @@
 <?php
-include('simple_html_dom.php');
 include('func.php');
 if(isset($_POST['submit']))
 {
 	if(verify($_POST['scheme'])==1)
-	$url="http://results.vtu.ac.in/cbcs_".date("y")."/result_page.php?usn=";
-else $url="http://results.vtu.ac.in/results".date("y")."/result_page.php?usn=";
+	$url="http://results.vtu.ac.in/cbcs_17".date('y')."/result_page.php";
+else $url="http://results.vtu.ac.in/results".date("y")."/result_page.php";
 	if(strlen($_POST['usn'])<=8)
 	{
 		echo "<meta name=viewport content=width=device-width, initial-scale=1>";
 		$sub=NULL;
 		$flag=false;
-		$dom=new simple_html_dom();
 		$usn=strtolower(verify($_POST['usn']));
-		$url.=$usn;
 		if($usn!=NULL)
 		{
 			$tags="<meta name=viewport content=width=device-width, initial-scale=1><link rel=stylesheet href=bootstrap.min.css></link><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script><script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script><link rel=\"stylesheet\" href=\"bootstrap.min.css\">";
 			echo $tags;
 			for($index=1;$index<130;$index++)
 			{
-				//make index 3 digit
+				//make index 3 digits
 				if($index<100) $index=str_pad($index, 3, "0", STR_PAD_LEFT);
-				$dom = file_get_html($url.$index);
+				$dom = fetch_result($usn.$index, $url);
 				if($dom!=NULL)
 				{
-					$sub=proc($dom);
+					$sub=process($dom);
 				}
 				if($sub!=NULL)
 				{
-						display($sub);$flag=true;
+					display($sub);
+					$flag=true;
 				}
 			}
 		}
@@ -65,7 +63,7 @@ else $url="http://results.vtu.ac.in/results".date("y")."/result_page.php?usn=";
       <li><a href="index.html">Home</a></li>
       <li><a href="contact.html">Feedback</a></li>
       <li><a href="./dbms/index.html">DBMS Project</a></li>
-    </ul>	
+    </ul>
 	</div>
 	</div>
 </nav>
