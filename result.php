@@ -3,7 +3,7 @@ include('func.php');
 if(isset($_POST['submit']))
 {
 	if(verify($_POST['scheme'])==1)
-	$url="http://results.vtu.ac.in/cbcs_17".date('y')."/result_page.php";
+	$url="http://results.vtu.ac.in/cbcs_".date('y')."/result_page.php";
 else $url="http://results.vtu.ac.in/results".date("y")."/result_page.php";
 	if(strlen($_POST['usn'])<=8)
 	{
