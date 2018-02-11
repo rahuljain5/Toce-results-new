@@ -3,8 +3,41 @@ include('func.php');
 if(isset($_POST['submit']))
 {
 	if(verify($_POST['scheme'])==1)
-	$url="http://results.vtu.ac.in/cbcs_".date('y')."/result_page.php";
-else $url="http://results.vtu.ac.in/results".date("y")."/result_page.php";
+	$url="http://results.vtu.ac.in/vitaviresultcbcs/resultpage.php";
+else $url="http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
+	echo "<style> .tbbg {
+		background-color: red !important;
+		/* background:transparent!important; */
+	 }
+	  .divTable{
+		display: table;
+		width: 100%;
+	  }
+	  .divTableRow {
+		display: table-row;
+	  }
+	  .divTableHeading {
+		background-color: #EEE;
+		display: table-header-group;
+	  }
+	  .divTableCell, .divTableHead {
+		border: 1px solid #999999;
+		display: table-cell;
+		padding: 3px 10px;
+	  }
+	  .divTableHeading {
+		background-color: #EEE;
+		display: table-header-group;
+		font-weight: bold;
+	  }
+	  .divTableFoot {
+		background-color: #EEE;
+		display: table-footer-group;
+		font-weight: bold;
+	  }
+	  .divTableBody {
+		display: table-row-group;
+	  }</style>";
 	if(strlen($_POST['usn'])<=8)
 	{
 		echo "<meta name=viewport content=width=device-width, initial-scale=1>";
@@ -13,7 +46,8 @@ else $url="http://results.vtu.ac.in/results".date("y")."/result_page.php";
 		$usn=strtolower(verify($_POST['usn']));
 		if($usn!=NULL)
 		{
-			$tags="<meta name=viewport content=width=device-width, initial-scale=1><link rel=stylesheet href=bootstrap.min.css></link><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script><script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script><link rel=\"stylesheet\" href=\"bootstrap.min.css\">";
+			$tags="<link href=\"http://fonts.googleapis.com/css?family=Open+Sans:400,600,700\" rel=\"stylesheet\" type=\"text/css\">
+			<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">";
 			echo $tags;
 			for($index=1;$index<130;$index++)
 			{
