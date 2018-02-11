@@ -5,8 +5,8 @@ function process($str)
 	if(strpos($str,"alert(\"University Seat Number is not available or Invalid..!\");")==false)
 			{
 			$sub="<div class=\"panel-heading text-center\">";
-			$strt=strrpos($str,"<span class=\"glyphicon glyphicon-globe\"></span>");
-			$end=strpos($str,"<div class=\"panel-heading text-center\" style=\"background-color: rgba(163, 102, 47, 0.5);color: black;font-size: 15pt;\"><span class=\"glyphicon glyphicon-th-list\">");
+			$strt=strrpos($str," <img src=\"../images/vtulogosmall_2.png\" style=\"left:30%;position: absolute;text-align: center;\">") + 97;
+			$end=strpos($str,"<div class=\"panel-heading text-center\" style=\"color:#0e1819;font-size: 12pt;background-color:#68d37b99\"><span class=\"glyphicon glyphicon-th-list\"></span>");
 			$end-=$strt;
 			$sub.=substr($str,$strt,$end);
 			$sub.="</div></div></div>";
@@ -29,7 +29,7 @@ function verify($str)
 }
 function fetch_result($id, $url)
 {
-	//CUrl and return the dom
+	//CURL and return the dom
 	$ch = curl_init();
 	$curlConfig = array(
 	    CURLOPT_URL            => $url,
@@ -40,6 +40,7 @@ function fetch_result($id, $url)
 	curl_setopt_array($ch, $curlConfig);
 	$result = curl_exec($ch);
 	curl_close($ch);
+	// echo $result;
 	return $result;
 }
 ?>
