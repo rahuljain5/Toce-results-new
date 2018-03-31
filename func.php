@@ -15,10 +15,7 @@ function process($str)
 }
 function display($str)
 {
-		ob_start();
 		echo $str;
-		ob_flush();
-		flush();
 }
 function verify($str)
 {
@@ -35,7 +32,7 @@ function fetch_result($id, $url)
 	    CURLOPT_URL            => $url,
 	    CURLOPT_POST           => true,
 	    CURLOPT_RETURNTRANSFER => true,
-	    CURLOPT_POSTFIELDS     => array('usn' => $id)
+	    CURLOPT_POSTFIELDS     => array('lns' => $id)
 	);
 	curl_setopt_array($ch, $curlConfig);
 	$result = curl_exec($ch);
