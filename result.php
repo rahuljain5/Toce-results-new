@@ -1,11 +1,13 @@
 <?php
-include('func.php');
-if(isset($_POST['submit']))
-{
-	if(verify($_POST['scheme'])==1)
-	$url="http://results.vtu.ac.in/vitaviresultcbcs/resultpage.php";
-else $url="http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
-	echo "<style> .tbbg {
+include 'func.php';
+if (isset($_POST['submit'])) {
+    if (verify($_POST['scheme']) == 1) {
+        $url = "http://results.vtu.ac.in/vitaviresultcbcs/resultpage.php";
+    } else {
+        $url = "http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
+    }
+
+    echo "<style> .tbbg {
 		background-color: red !important;
 		/* background:transparent!important; */
 	 }
@@ -38,38 +40,35 @@ else $url="http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
 	  .divTableBody {
 		display: table-row-group;
 	  }</style>";
-	if(strlen($_POST['usn'])<=8)
-	{
-		echo "<meta name=viewport content=width=device-width, initial-scale=1>";
-		$sub=NULL;
-		$flag=false;
-		$usn=strtolower(verify($_POST['usn']));
-		if($usn!=NULL)
-		{
-			$tags="<link href=\"http://fonts.googleapis.com/css?family=Open+Sans:400,600,700\" rel=\"stylesheet\" type=\"text/css\">
+    if (strlen($_POST['usn']) <= 8) {
+        echo "<meta name=viewport content=width=device-width, initial-scale=1>";
+        $sub = null;
+        $flag = false;
+        $usn = strtolower(verify($_POST['usn']));
+        if ($usn != null) {
+            $tags = "<link href=\"http://fonts.googleapis.com/css?family=Open+Sans:400,600,700\" rel=\"stylesheet\" type=\"text/css\">
 			<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">";
-			echo $tags;
-			for($index=1;$index<130;$index++)
-			{
-				//make index 3 digits
-				if($index<100) $index=str_pad($index, 3, "0", STR_PAD_LEFT);
-				$dom = fetch_result($usn.$index, $url);
-				if($dom!=NULL)
-				{
-					$sub=process($dom);
-				}
-				if($sub!=NULL)
-				{
-					display($sub);
-					$flag=true;
-				}
-			}
-		}
-	if(!$flag)
-	{
-		die("<h1 style='text-align:center'>NO RESULT FOUND</h1>");
-	}
-	}
+            echo $tags;
+            for ($index = 1; $index < 130; $index++) {
+                //make index 3 digits
+                if ($index < 100) {
+                    $index = str_pad($index, 3, "0", STR_PAD_LEFT);
+                }
+
+                $dom = fetch_result($usn . $index, $url);
+                if ($dom != null) {
+                    $sub = process($dom);
+                }
+                if ($sub != null) {
+                    display($sub);
+                    $flag = true;
+                }
+            }
+        }
+        if (!$flag) {
+            die("<h1 style='text-align:center'>NO RESULT FOUND</h1>");
+        }
+    }
 }
 ?>
 <title>Class Result VTU</title>
@@ -79,8 +78,8 @@ else $url="http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
 <meta name="robots" content="index,follow">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="bootstrap.min.css">
-<link rel="icon" href="./images/logo.png"></link>
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+<link rel="icon" href="./assets/images/logo.png"></link>
 <body>
 <nav class="navbar" style="margin-bottom:0px;">
   <div class="container-fluid" style="margin-bottom:0px;">
@@ -96,7 +95,6 @@ else $url="http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
 <ul class="nav navbar-nav navbar-right navbar-text" style="font-size:34px;" >
       <li><a href="index.html">Home</a></li>
       <li><a href="contact.html">Feedback</a></li>
-      <li><a href="./dbms/index.html">DBMS Project</a></li>
     </ul>
 	</div>
 	</div>
@@ -117,21 +115,17 @@ else $url="http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
 	 </div><hr/>
 	<fieldset style="text-align:center;">
  	 <h3 style="text-align:center; font-size:30px;">Enter the first 7 letters of the USN.</h3>
-<form method="post" action=<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>>
+<form method="post" action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>>
 	 <h3 style="text-align:center;font-size:30px;"><strong>USN:</strong></h3>
 	 <input name="usn" placeholder="First 7 digits of usn here" size="20" pattern="[1-4]{1}[a-z A-Z]{2}[1-9]{2}[A-Z a-z]{2}" autocomplete="off" required style="display:inline-block; align:center;" value=""></input>
 	 <br/>
-	 <input name="scheme" size="20" autocomplete="off" required style="display:none; align:center;" value="<?php echo verify($_GET['scheme']);?>"></input>
+	 <input name="scheme" size="20" autocomplete="off" required style="display:none; align:center;" value="<?php echo verify($_GET['scheme']); ?>"></input>
 	 <br/>
 	 <button class="btn" style="display:inline-block; vertical-align:middle; padding:10px 10px; background:inherit; box-sizing:border-box; border:2px solid black;" value="submit1" name="submit"><strong>SUBMIT</strong></button>
 </form>
 </fieldset>
 <hr/>
-<div class="footer container-fluid" style="vertical-align:bottom;  width:99%; ">
-<a href="https://github.com/rahuljain5" ><img src="./images/github_icon.png" alt="github logo" height="40px" width="40px" ></img></a>
-<a href="profile.html" ><img src="./images/hireme_icon.png" alt="Hireme logo" height="40px" width="40px" ></img></a>
-<h4 style="float:right;">By <b>Rahul Jain<b></h4>
-</div>
+<script src="./assets/js/footer.js" ></script>
 </body>
 </head>
 </html>
