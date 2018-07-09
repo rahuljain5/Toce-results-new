@@ -4,7 +4,7 @@ if (isset($_POST['submit'])) {
     if (verify($_POST['scheme']) == 1) {
         $url = "http://results.vtu.ac.in/vitaviresultcbcs/resultpage.php";
     } else {
-        $url = "http://results.vtu.ac.in/vitaviresultnoncbcs/resultpage.php";
+        $url = "http://results.vtu.ac.in/vitaviresultnoncbcs18/resultpage.php";
     }
 
     echo "<style> .tbbg {
